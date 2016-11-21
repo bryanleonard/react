@@ -1,2 +1,10 @@
 // let's go!
-// begin with 3
+// begin with 4
+
+import React from 'react';
+import { render } from 'react-dom'; // react-dom render method only
+// import ReactDOM from 'react-dom'; // if we wanted the whole package
+
+import StorePicker from './components/StorePicker';
+
+render(<StorePicker/>, document.getElementById('main'));
