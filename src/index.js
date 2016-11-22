@@ -1,10 +1,12 @@
 // let's go!
-// begin with 5
+// begin with 7
 
 import React from 'react';
 import { render } from 'react-dom'; // react-dom render method only
 // import ReactDOM from 'react-dom'; // if we wanted the whole package
+import './css/style.css';
 
-import StorePicker from './components/StorePicker';
+import App from './components/App';
+import StorePicker from './components/StorePicker';;
 
-render(<StorePicker/>, document.getElementById('main'));
+render(<App/>, document.getElementById('main'));
