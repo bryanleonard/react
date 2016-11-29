@@ -17,12 +17,11 @@ class StorePicker extends React.Component {
 
 	goToStore(e) {
 		// 1st grab text
-		//  2nd update URL
+		// 2nd update URL
 		 e.preventDefault();
-		 
-		 // Need to bind method to component
-		 console.log(this.storeInput.value);
-
+		
+		 const storeId = this.storeInput.value;
+		 this.context.router.transitionTo(`/store/${storeId}`);
 	}
 
 	render() {
@@ -36,4 +35,10 @@ class StorePicker extends React.Component {
 		)
 	}
 }
+
+//Surface the router from the parent class using contextTypes
+StorePicker.contextTypes = {
+	router: React.PropTypes.object
+}
+
 export default StorePicker;
