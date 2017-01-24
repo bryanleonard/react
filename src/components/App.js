@@ -4,7 +4,7 @@ import Order from './Order';
 import Inventory from './Inventory';
 import SampleFishes from '../sample-fishes';
 import Fish from './Fish';
-import base from '../base';
+import base from '../base'; //firebase.google.com
 
 class App extends React.Component {
 	
@@ -23,17 +23,32 @@ class App extends React.Component {
 		};
 	}
 
+	// could also look at shouldComonentUpdate in Lifecycle Methods
 	componentWillMount() {
+		//this runs before app is rendered
 		this.ref = base.syncState(`${this.props.params.storeId}/fishes`
 			, {
 				context: this,
 				state: 'fishes'
 			})
-		
+
+		// check for any order in localStorage
+		const localStorageRef = localStorage.getItem(`order-${this.props.params.storeId}`)
+
+		if (localStorageRef) {
+			//update app component order state
+			this.setState({
+				order: JSON.parse(localStorageRef)
+			});
+		}
 	}
 
 	componentWillUnmount() {
 		base.removeBinding(this.ref);
+	}
+
+	componentWillUpdate(nextProps, nextState) {
+		localStorage.setItem(`order-${this.props.params.storeId}`, JSON.stringify(nextState.order))
 	}
 
 	addFish(fish) {
@@ -82,8 +97,12 @@ class App extends React.Component {
 						}
 					</ul>
 				</div>
-				<Order fishes={this.state.fishes} order={this.state.order} />
-				<Inventory addFish={this.addFish} loadSamples={this.loadSamples} />
+				<Order 
+					fishes={this.state.fishes} 
+					order={this.state.order} 
+					parans={this.props.params} 
+				/>
+				<Inventory addFish={this.addFish} loadSamples={this.loadSamples} fishes={this.state.fishes} />
 			</section>
 		)
 	}
