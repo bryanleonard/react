@@ -1,5 +1,5 @@
 // let's go!
-// begin with 20, 5:30
+// begin with 22 - 5:30
 
 import React from 'react';
 import { render } from 'react-dom'; // react-dom render method only, import ReactDOM from 'react-dom'; // if we wanted the whole package
